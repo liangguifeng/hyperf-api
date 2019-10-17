@@ -12,6 +12,7 @@ return [
     'handler' => [
         'http' => [
             App\Exception\Handler\AppExceptionHandler::class,
+            App\Exception\Handler\JWTExceptionHandler::class,
             Hyperf\Validation\ValidationExceptionHandler::class,
             App\Exception\Handler\TokenValidExceptionHandler::class,
         ],
