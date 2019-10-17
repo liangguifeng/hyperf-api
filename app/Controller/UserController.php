@@ -36,7 +36,7 @@ class UserController extends Controller
         //获取token中的用户数据
         $user = $this->jwt->getParserData();
 
-        $userInfo = User::query()->where('username', $user['username'])->get();
+        $userInfo = User::query()->where('account', $user['account'])->get();
 
         $data = $userInfo->map(function ($userInfo) {
             return [
