@@ -40,6 +40,11 @@ class LoginController extends Controller
                 'account'  => $user->account,
             ];
 
+            //更新用户登录时间
+            User::query()->where('account', $this->request->input('account'))->update([
+                'last_time' => date('Y-m-d H:i:s'),
+            ]);
+
             $token = $this->jwt->getToken($userData);
             $data  = [
                 'token' => (string) $token,

@@ -16,7 +16,8 @@ Router::post('/login', 'App\Controller\Auth\LoginController@login');
 Router::post('/register', 'App\Controller\Auth\RegisterController@register');
 
 Router::addGroup('/api', function () {
-    Router::get('/user', 'App\Controller\UserController@getUserInfo');
+    Router::get('/user', 'App\Controller\UserController@index');
+    Router::put('/user', 'App\Controller\UserController@update');
 }, [
     'middleware' => [App\Middleware\JwtAuthMiddleware::class]
 ]);

@@ -26,12 +26,12 @@ class UserController extends Controller
     protected $jwt;
 
     /**
-     * 获取用户信息
+     * 获取用户信息.
      *
      * @param RequestInterface  $request
      * @param ResponseInterface $response
      */
-    public function getUserInfo()
+    public function index()
     {
         //获取token中的用户数据
         $user = $this->jwt->getParserData();
@@ -50,5 +50,31 @@ class UserController extends Controller
         });
 
         return $this->success($data);
+    }
+
+    /**
+     * 用户更新资料.
+     *
+     * @return array
+     */
+    public function update()
+    {
+        //获取token中的用户数据
+        $user = $this->jwt->getParserData();
+
+        $data = [
+            'avatar' => $this->request->input('avatar'),
+            'gender' => $this->request->input('gender'),
+            'email'  => $this->request->input('email'),
+            'mobile' => $this->request->input('mobile'),
+        ];
+
+        $userInfo = User::query()->where('account', $user['account'])->update($data);
+
+        if ($userInfo == 1) {
+            return $this->success([$userInfo], '更新资料成功！');
+        }
+
+        return $this->failed('更新资料失败！');
     }
 }

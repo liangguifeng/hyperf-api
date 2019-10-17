@@ -33,7 +33,8 @@ class RegisterController extends Controller
         $Loginrequest->validated();
 
         $userData = [
-            'account' => $this->request->input('account'),
+            'account'  => $this->request->input('account'),
+            'mobile'   => $this->request->input('mobile'),
             'password' => password_hash($this->request->input('password'), PASSWORD_DEFAULT),
         ];
 
