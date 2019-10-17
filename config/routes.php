@@ -16,8 +16,7 @@ Router::post('/login', 'App\Controller\Auth\LoginController@login');
 Router::post('/register', 'App\Controller\Auth\RegisterController@register');
 
 Router::addGroup('/api', function () {
-    Router::get('/user', 'App\Controller\IndexController@index');
-    Router::get('/data', 'App\Controller\IndexController@getData');
+    Router::get('/user', 'App\Controller\UserController@getUserInfo');
 }, [
     'middleware' => [Phper666\JwtAuth\Middleware\JwtAuthMiddleware::class]
 ]);

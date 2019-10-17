@@ -12,60 +12,43 @@ namespace App\Controller\Auth;
 
 use App\Model\User;
 use Phper666\JwtAuth\Jwt;
-use Psr\Container\ContainerInterface;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Controller\Controller;
+use Hyperf\Di\Annotation\Inject;
 
-class LoginController
+class LoginController extends Controller
 {
-    protected $container;
-
-    protected $jwt;
-
     /**
-     * 通过构造函数注入JWT.
+     * @Inject
      *
-     * IndexController constructor.
-     *
-     * @param ContainerInterface $container
-     * @param Jwt                $jwt
+     * @var Jwt
      */
-    public function __construct(Jwt $jwt)
-    {
-        $this->jwt = $jwt;
-    }
+    protected $jwt;
 
     /**
      * 用户登录.
      *
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
-     *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return array
      */
-    public function login(RequestInterface $request, ResponseInterface $response)
+    public function login()
     {
-        $user = User::query()->where('username', $request->input('username'))->first();
+        $user = User::query()->where('account', $this->request->input('account'))->first();
 
-        if (password_verify($request->input('password'), $user->password)) {
+        //验证用户账户密码
+        if (!empty($user->password) && password_verify($this->request->input('password'), $user->password)) {
             $userData = [
                 'id'       => $user->id,
-                'username' => $user->username,
+                'account'  => $user->account,
             ];
 
             $token = $this->jwt->getToken($userData);
             $data  = [
-                'code' => 0,
-                'msg'  => 'success',
-                'data' => [
-                    'token' => (string) $token,
-                    'exp'   => $this->jwt->getTTL(),
-                ],
+                'token' => (string) $token,
+                'exp'   => $this->jwt->getTTL(),
             ];
 
-            return $response->json($data);
+            return $this->success($data);
         }
 
-        return $response->json(['code' => 0, 'msg' => '登录失败', 'data' => []]);
+        return $this->failed('登录失败');
     }
 }

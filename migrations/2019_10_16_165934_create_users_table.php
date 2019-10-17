@@ -13,8 +13,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('id');
-            $table->string('username', 20)->nullable()->default('')->comment('帐号');
-            $table->string('password', 150)->nullable()->default('')->comment('密码');
+            $table->string('account', 20)->default('')->comment('帐号');
+            $table->string('password', 150)->default('')->comment('密码');
             $table->string('avatar', 150)->nullable()->default('')->comment('头像');
             $table->unsignedTinyInteger('gender')->nullable()->default('0')->comment('性别[0:未知;1:男;2:女]');
             $table->string('email', 60)->nullable()->default('')->comment('邮箱');

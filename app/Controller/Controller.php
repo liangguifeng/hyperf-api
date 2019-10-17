@@ -15,7 +15,7 @@ use Psr\Container\ContainerInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
-abstract class AbstractController
+class Controller
 {
     /**
      * @Inject
@@ -39,38 +39,31 @@ abstract class AbstractController
     protected $response;
 
     /**
-     * 请求成功返回通用格式.
+     * 请求成功
      *
-     * @param $data
+     * @param        $data
+     * @param string $message
      *
      * @return array
      */
-    public function success($data)
+    public function success($data, $message = 'success')
     {
-        return [
-            'code' => 0,
-            'msg'  => 'success',
-            'data' => [
-                $data,
-            ],
-        ];
+        $code = $this->response->getStatusCode();
+
+        return ['message' => $message, 'code' => $code, 'data' => $data];
     }
 
     /**
-     * 请求失败 返回通用格式.
+     * 请求失败.
      *
-     * @param $data
+     * @param string $message
      *
      * @return array
      */
-    public function fail($data)
+    public function failed($message = 'Request format error!')
     {
-        return [
-            'code' => 1,
-            'msg'  => 'error',
-            'data' => [
-                $data,
-            ],
-        ];
+        $code = $this->response->getStatusCode();
+
+        return ['message' => $message, 'code' => $code, 'data' => ''];
     }
 }
