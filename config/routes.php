@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 use Hyperf\HttpServer\Router\Router;
 
+Router::get('/', 'App\Controller\WelcomeController@index');
 Router::post('/login', 'App\Controller\Auth\LoginController@login');
 Router::post('/register', 'App\Controller\Auth\RegisterController@register');
 
