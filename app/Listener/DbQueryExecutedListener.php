@@ -1,25 +1,23 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /**
- * This file is part of Hyperf.
+ * This file is form http://findcat.cn
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     http://findcat.cn
+ * @email    1476982312@qq.com
  */
 
 namespace App\Listener;
 
-use Hyperf\Database\Events\QueryExecuted;
-use Hyperf\Event\Annotation\Listener;
-use Hyperf\Event\Contract\ListenerInterface;
-use Hyperf\Logger\LoggerFactory;
 use Hyperf\Utils\Arr;
 use Hyperf\Utils\Str;
-use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Hyperf\Logger\LoggerFactory;
+use Hyperf\Event\Annotation\Listener;
+use Psr\Container\ContainerInterface;
+use Hyperf\Database\Events\QueryExecuted;
+use Hyperf\Event\Contract\ListenerInterface;
 
 /**
  * @Listener
@@ -50,7 +48,8 @@ class DbQueryExecutedListener implements ListenerInterface
     {
         if ($event instanceof QueryExecuted) {
             $sql = $event->sql;
-            if (! Arr::isAssoc($event->bindings)) {
+
+            if (!Arr::isAssoc($event->bindings)) {
                 foreach ($event->bindings as $key => $value) {
                     $sql = Str::replaceFirst('?', "'{$value}'", $sql);
                 }

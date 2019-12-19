@@ -1,20 +1,18 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /**
- * This file is part of Hyperf.
+ * This file is form http://findcat.cn
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     http://findcat.cn
+ * @email    1476982312@qq.com
  */
 
-use Hyperf\Contract\StdoutLoggerInterface;
 use Psr\Log\LogLevel;
+use Hyperf\Contract\StdoutLoggerInterface;
 
 return [
-    'app_name' => env('APP_NAME', 'skeleton'),
+    'app_name'                   => env('APP_NAME', 'skeleton'),
     StdoutLoggerInterface::class => [
         'log_level' => [
             LogLevel::ALERT,

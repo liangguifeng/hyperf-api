@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /**
- * This file is part of Hyperf.
+ * This file is form http://findcat.cn
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     http://findcat.cn
+ * @email    1476982312@qq.com
  */
 
 use Zipkin\Samplers\BinarySampler;
@@ -15,8 +13,8 @@ use Zipkin\Samplers\BinarySampler;
 return [
     'enable' => [
         'guzzle' => false,
-        'redis' => false,
-        'db' => false,
+        'redis'  => false,
+        'db'     => false,
         'method' => false,
     ],
     'zipkin' => [
@@ -29,7 +27,7 @@ return [
         ],
         'options' => [
             'endpoint_url' => env('ZIPKIN_ENDPOINT_URL', 'http://localhost:9411/api/v2/spans'),
-            'timeout' => env('ZIPKIN_TIMEOUT', 1),
+            'timeout'      => env('ZIPKIN_TIMEOUT', 1),
         ],
         'sampler' => BinarySampler::createAsAlwaysSample(),
     ],

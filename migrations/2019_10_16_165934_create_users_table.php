@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * This file is form http://findcat.cn
+ *
+ * @link     http://findcat.cn
+ * @email    1476982312@qq.com
+ */
 use Carbon\Carbon;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\Database\Schema\Blueprint;

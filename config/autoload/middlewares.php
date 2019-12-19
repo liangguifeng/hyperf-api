@@ -1,17 +1,15 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /**
- * This file is part of Hyperf.
+ * This file is form http://findcat.cn
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     http://findcat.cn
+ * @email    1476982312@qq.com
  */
 
 return [
     'http' => [
-        Hyperf\Validation\Middleware\ValidationMiddleware::class
+        Hyperf\Validation\Middleware\ValidationMiddleware::class,
     ],
 ];

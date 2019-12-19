@@ -1,22 +1,20 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /**
- * This file is part of Hyperf.
+ * This file is form http://findcat.cn
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     http://findcat.cn
+ * @email    1476982312@qq.com
  */
 
 namespace App\Exception\Handler;
 
-use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
-use Psr\Http\Message\ResponseInterface;
 use Throwable;
+use Psr\Http\Message\ResponseInterface;
+use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\HttpMessage\Stream\SwooleStream;
+use Hyperf\ExceptionHandler\ExceptionHandler;
 
 class AppExceptionHandler extends ExceptionHandler
 {
@@ -34,6 +32,7 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
+
         return $response->withStatus(500)->withBody(new SwooleStream('Internal Server Error.'));
     }
 

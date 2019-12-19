@@ -1,26 +1,24 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /**
- * This file is part of Hyperf.
+ * This file is form http://findcat.cn
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     http://findcat.cn
+ * @email    1476982312@qq.com
  */
 
 namespace App\Listener;
 
-use Hyperf\AsyncQueue\Event\AfterHandle;
-use Hyperf\AsyncQueue\Event\BeforeHandle;
+use Hyperf\Logger\LoggerFactory;
 use Hyperf\AsyncQueue\Event\Event;
-use Hyperf\AsyncQueue\Event\FailedHandle;
-use Hyperf\AsyncQueue\Event\RetryHandle;
 use Hyperf\Event\Annotation\Listener;
+use Hyperf\AsyncQueue\Event\AfterHandle;
+use Hyperf\AsyncQueue\Event\RetryHandle;
+use Hyperf\AsyncQueue\Event\BeforeHandle;
+use Hyperf\AsyncQueue\Event\FailedHandle;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
-use Hyperf\Logger\LoggerFactory;
 
 /**
  * @Listener
@@ -39,7 +37,7 @@ class QueueHandleListener implements ListenerInterface
 
     public function __construct(LoggerFactory $loggerFactory, FormatterInterface $formatter)
     {
-        $this->logger = $loggerFactory->get('queue');
+        $this->logger    = $loggerFactory->get('queue');
         $this->formatter = $formatter;
     }
 
@@ -56,9 +54,9 @@ class QueueHandleListener implements ListenerInterface
     public function process(object $event)
     {
         if ($event instanceof Event && $event->message->job()) {
-            $job = $event->message->job();
+            $job      = $event->message->job();
             $jobClass = get_class($job);
-            $date = date('Y-m-d H:i:s');
+            $date     = date('Y-m-d H:i:s');
 
             switch (true) {
                 case $event instanceof BeforeHandle:
